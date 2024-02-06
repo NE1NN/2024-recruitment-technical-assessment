@@ -16,7 +16,7 @@ export default function Card({
   averageStars,
 }: CardProps) {
   return (
-    <button className="flex flex-col shadow-lg rounded-xl px-5 py-7 bg-gray-50">
+    <button className="flex flex-col shadow-lg rounded-xl px-5 py-7 bg-gray-50 hover:bg-gray-200">
       <div className="flex w-full justify-between">
         <div className="font-extrabold text-2xl">
           {coursePrefix}
