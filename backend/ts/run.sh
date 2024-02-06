@@ -1,1 +1,2 @@
-tsc task.ts && node task.js
+#!/bin/bash
+tsc -p . && node task.js
