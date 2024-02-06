@@ -6,10 +6,12 @@ import {
   ChevronDownIcon,
 } from '@heroicons/react/24/outline';
 import Card from './components/Card';
+import Header from './components/Header';
 
 function App() {
   const [openDropdown, setOpenDropdown] = useState(false);
   const [inputValue, setInputValue] = useState('');
+  const [isClicked, setIsClicked] = useState(false);
 
   const dropdownOptions = ['Skull emoji', 'Skull', 'Bruh'];
 
@@ -68,13 +70,10 @@ function App() {
     <div className="flex gap-40 h-screen">
       <Sidebar />
       <div className="pt-4 pb-10 pr-32 w-full overflow-y-auto">
-        <div>DevSoc presents</div>
-        <div className="text-blue-500 font-extrabold text-5xl mt-5">
-          unielectives
-        </div>
-        <div className="font-extrabold mt-2">
-          Your one-stop shop for UNSW course and elective reviews.
-        </div>
+        <Header
+          isClicked={isClicked}
+          onClick={() => setIsClicked((prev) => !prev)}
+        />
         <div className="mt-8 flex flex-col gap-3">
           <div className="w-full flex gap-3 items-center border py-1 pl-2 border-blue-500 rounded">
             <MagnifyingGlassIcon className="w-6 h-6 stroke-blue-500" />
@@ -87,7 +86,7 @@ function App() {
             />
           </div>
           <div className="w-52 h-10 relative">
-            <div className='absolute flex flex-col border w-full px-3 gap-3 py-1 rounded bg-white border-black'>
+            <div className="absolute flex flex-col border w-full px-3 gap-3 py-1 rounded bg-white border-black">
               <button
                 className="w-full flex items-center justify-between rounded"
                 onClick={() => setOpenDropdown((prev) => !prev)}

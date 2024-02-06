@@ -41,7 +41,7 @@ export default function Card({
       <div className="text-sm mt-3">{courseTitle}</div>
       <div className="flex gap-1 mt-10">
         {offeredTerms.map((term, idx) => (
-          <div key={idx} className="bg-cyan-300 rounded-xl text-sm px-1">
+          <div key={idx} className="bg-cyan-300 rounded-xl text-sm px-2 py-0.5">
             {term}
           </div>
         ))}
