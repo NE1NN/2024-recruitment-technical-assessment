@@ -1,2 +1,9 @@
 Please detail the instructions to view your solution here:
+To run do:
+1. npm i
+2. npm run dev
 
+or
+1. npm i
+2. npm run build
+3. npm run preview
