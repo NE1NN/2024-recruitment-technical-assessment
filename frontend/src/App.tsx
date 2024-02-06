@@ -1,7 +1,13 @@
 import './App.css';
+import Sidebar from './components/Sidebar';
 
 function App() {
-  return <div className='bg-black w-96 h-96'>hi</div>;
+  return (
+    <div className='flex'>
+      <Sidebar />
+      <div className=''></div>
+    </div>
+  );
 }
 
 export default App;
