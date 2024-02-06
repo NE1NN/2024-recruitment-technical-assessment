@@ -6,7 +6,7 @@ type SearchBarProps = {
 };
 export default function SearchBar({ inputValue, onChange }: SearchBarProps) {
   return (
-    <div className="w-full flex gap-3 items-center border py-1 pl-2 border-blue-500 rounded">
+    <div className="w-full flex gap-3 items-center border p-2 pl-2 border-blue-500 rounded">
       <MagnifyingGlassIcon className="w-6 h-6 stroke-blue-500" />
       <input
         type="text"
