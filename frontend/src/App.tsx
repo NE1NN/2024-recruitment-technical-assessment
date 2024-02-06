@@ -5,11 +5,13 @@ import Card from './components/Card';
 import Header from './components/Header';
 import SearchBar from './components/SearchBar';
 import Dropdown from './components/Dropdown';
+import Popup from './components/Popup';
 
 function App() {
   const [openDropdown, setOpenDropdown] = useState(false);
   const [inputValue, setInputValue] = useState('');
-  const [isClicked, setIsClicked] = useState(false);
+  const [isHeaderClicked, setIsHeaderClicked] = useState(false);
+  const [isSearchClicked, setIsSearchClicked] = useState(false);
 
   const dropdownOptions = ['Skull emoji', 'Skull', 'Bruh'];
 
@@ -66,16 +68,18 @@ function App() {
 
   return (
     <div className="flex gap-40 h-screen">
+      {isSearchClicked && <Popup onClick={() => setIsSearchClicked(false)} />}
       <Sidebar />
       <div className="pt-4 pb-10 pr-32 w-full overflow-y-auto">
         <Header
-          isClicked={isClicked}
-          onClick={() => setIsClicked((prev) => !prev)}
+          isClicked={isHeaderClicked}
+          onClick={() => setIsHeaderClicked((prev) => !prev)}
         />
         <div className="mt-8 flex flex-col gap-3">
           <SearchBar
             inputValue={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
+            onClick={() => setIsSearchClicked(true)}
           />
           <Dropdown
             onClick={() => setOpenDropdown((prev) => !prev)}

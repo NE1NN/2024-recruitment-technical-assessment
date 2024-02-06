@@ -3,8 +3,13 @@ import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 type SearchBarProps = {
   inputValue: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onClick: () => void;
 };
-export default function SearchBar({ inputValue, onChange }: SearchBarProps) {
+export default function SearchBar({
+  inputValue,
+  onChange,
+  onClick,
+}: SearchBarProps) {
   return (
     <div className="w-full flex gap-3 items-center border p-2 pl-2 border-blue-500 rounded">
       <MagnifyingGlassIcon className="w-6 h-6 stroke-blue-500" />
@@ -14,6 +19,7 @@ export default function SearchBar({ inputValue, onChange }: SearchBarProps) {
         placeholder="Search for a course e.g. COMP1511"
         value={inputValue}
         onChange={onChange}
+        onClick={onClick}
       />
     </div>
   );
