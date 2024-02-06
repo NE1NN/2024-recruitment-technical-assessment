@@ -1,12 +1,10 @@
 import { useState } from 'react';
 import './App.css';
 import Sidebar from './components/Sidebar';
-import {
-  MagnifyingGlassIcon,
-  ChevronDownIcon,
-} from '@heroicons/react/24/outline';
 import Card from './components/Card';
 import Header from './components/Header';
+import SearchBar from './components/SearchBar';
+import Dropdown from './components/Dropdown';
 
 function App() {
   const [openDropdown, setOpenDropdown] = useState(false);
@@ -75,31 +73,15 @@ function App() {
           onClick={() => setIsClicked((prev) => !prev)}
         />
         <div className="mt-8 flex flex-col gap-3">
-          <div className="w-full flex gap-3 items-center border py-1 pl-2 border-blue-500 rounded">
-            <MagnifyingGlassIcon className="w-6 h-6 stroke-blue-500" />
-            <input
-              type="text"
-              className="w-full outline-none text-blue-500 placeholder:text-blue-500"
-              placeholder="Search for a course e.g. COMP1511"
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-            />
-          </div>
-          <div className="w-52 h-10 relative">
-            <div className="absolute flex flex-col border w-full px-3 gap-3 py-1 rounded bg-white border-black">
-              <button
-                className="w-full flex items-center justify-between rounded"
-                onClick={() => setOpenDropdown((prev) => !prev)}
-              >
-                <div>Sort by</div>
-                <ChevronDownIcon className="w-5 h-5" />
-              </button>
-              {openDropdown &&
-                dropdownOptions.map((option, idx) => (
-                  <div key={`${option}${idx}`}>{option}</div>
-                ))}
-            </div>
-          </div>
+          <SearchBar
+            inputValue={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+          />
+          <Dropdown
+            onClick={() => setOpenDropdown((prev) => !prev)}
+            openDropdown={openDropdown}
+            dropdownOptions={dropdownOptions}
+          />
         </div>
         <div className="grid grid-cols-3 gap-10 mt-8">
           {courses.map((course, idx) => (
