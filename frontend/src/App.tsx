@@ -86,18 +86,20 @@ function App() {
               onChange={(e) => setInputValue(e.target.value)}
             />
           </div>
-          <div className="flex flex-col gap-3 border border-black w-52 rounded px-3 py-1">
-            <button
-              className="w-full flex items-center justify-between rounded relative"
-              onClick={() => setOpenDropdown((prev) => !prev)}
-            >
-              <div>Sort by</div>
-              <ChevronDownIcon className="w-5 h-5" />
-            </button>
-            {openDropdown &&
-              dropdownOptions.map((option, idx) => (
-                <div key={`${option}${idx}`}>{option}</div>
-              ))}
+          <div className="w-52 h-10 relative">
+            <div className='absolute flex flex-col border w-full px-3 gap-3 py-1 rounded bg-white border-black'>
+              <button
+                className="w-full flex items-center justify-between rounded"
+                onClick={() => setOpenDropdown((prev) => !prev)}
+              >
+                <div>Sort by</div>
+                <ChevronDownIcon className="w-5 h-5" />
+              </button>
+              {openDropdown &&
+                dropdownOptions.map((option, idx) => (
+                  <div key={`${option}${idx}`}>{option}</div>
+                ))}
+            </div>
           </div>
         </div>
         <div className="grid grid-cols-3 gap-10 mt-8">
