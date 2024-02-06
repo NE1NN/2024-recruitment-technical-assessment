@@ -13,7 +13,7 @@ export default function Dropdown({
 }: DropdownProps) {
   return (
     <div className="w-52 h-10 relative">
-      <div className="absolute flex flex-col border w-full pt-1 rounded bg-white border-black">
+      <div className="absolute flex flex-col border w-full pt-2 rounded bg-white border-black">
         <button
           className="w-full flex items-center justify-between rounded px-2"
           onClick={onClick}
