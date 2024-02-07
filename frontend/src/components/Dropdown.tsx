@@ -6,6 +6,7 @@ type DropdownProps = {
   dropdownOptions: string[];
   handleSort: (option: string) => void;
   selectedSort: string;
+  dropdownRef: React.RefObject<HTMLDivElement>
 };
 
 export default function Dropdown({
@@ -13,10 +14,11 @@ export default function Dropdown({
   openDropdown,
   dropdownOptions,
   selectedSort,
-  handleSort
+  handleSort,
+  dropdownRef
 }: DropdownProps) {
   return (
-    <div className="w-52 h-10 relative">
+    <div className="w-52 h-10 relative" ref={dropdownRef}>
       <div className="absolute flex flex-col border w-full pt-2 rounded bg-white border-black">
         <button
           className="w-full flex items-center justify-between rounded px-2"

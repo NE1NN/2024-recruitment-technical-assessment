@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './App.css';
 import Sidebar from './components/Sidebar';
 import Card from './components/Card';
@@ -24,6 +24,7 @@ function App() {
   const [isSearchClicked, setIsSearchClicked] = useState(false);
   const [searchedCourses, setSearchedCourses] = useState<Course[]>(courses);
   const [selectedSort, setSelectedSort] = useState('');
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value.toLowerCase();
@@ -52,6 +53,24 @@ function App() {
     setOpenDropdown(false);
   };
 
+  // Closes sort dropdown when the mouse clicks outside of it
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setOpenDropdown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleOutsideClick);
+
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  });
+
   return (
     <div className="flex gap-40 h-screen">
       {isSearchClicked && <Popup onClick={() => setIsSearchClicked(false)} />}
@@ -73,6 +92,7 @@ function App() {
             dropdownOptions={dropdownOptions}
             handleSort={handleSort}
             selectedSort={selectedSort}
+            dropdownRef={dropdownRef}
           />
         </div>
         <div className="grid grid-cols-3 gap-10 mt-8">
