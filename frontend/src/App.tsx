@@ -23,6 +23,7 @@ function App() {
   const [isHeaderClicked, setIsHeaderClicked] = useState(false);
   const [isSearchClicked, setIsSearchClicked] = useState(false);
   const [searchedCourses, setSearchedCourses] = useState<Course[]>(courses);
+  const [selectedSort, setSelectedSort] = useState('');
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value.toLowerCase();
@@ -35,6 +36,20 @@ function App() {
           .includes(input)
       )
     );
+  };
+
+  const handleSort = (option: string) => {
+    setSelectedSort(option);
+    if (option === 'Reviews') {
+      setSearchedCourses(
+        courses.sort((a, b) => b.total_reviews - a.total_reviews)
+      );
+    } else if (option === 'Ratings') {
+      setSearchedCourses(
+        courses.sort((a, b) => b.average_stars - a.average_stars)
+      );
+    }
+    setOpenDropdown(false);
   };
 
   return (
@@ -56,6 +71,8 @@ function App() {
             onClick={() => setOpenDropdown((prev) => !prev)}
             openDropdown={openDropdown}
             dropdownOptions={dropdownOptions}
+            handleSort={handleSort}
+            selectedSort={selectedSort}
           />
         </div>
         <div className="grid grid-cols-3 gap-10 mt-8">

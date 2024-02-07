@@ -36,7 +36,7 @@ export const courses = [
     course_code: 2511,
     course_title: 'Object-Oriented Design & Programming',
     average_stars: 3,
-    total_reviews: 33,
+    total_reviews: 69,
     offered_terms: ['Term 1', 'Term 2', 'Term 3'],
   },
   {
@@ -44,7 +44,7 @@ export const courses = [
     course_code: 3311,
     course_title: 'Database Systems',
     average_stars: 4,
-    total_reviews: 33,
+    total_reviews: 100,
     offered_terms: ['Term 1', 'Term 3'],
   },
 ];
