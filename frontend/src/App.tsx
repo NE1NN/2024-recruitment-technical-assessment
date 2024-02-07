@@ -6,65 +6,36 @@ import Header from './components/Header';
 import SearchBar from './components/SearchBar';
 import Dropdown from './components/Dropdown';
 import Popup from './components/Popup';
+import { courses, dropdownOptions } from './constants';
+
+type Course = {
+  course_prefix: string;
+  course_code: number;
+  course_title: string;
+  average_stars: number;
+  total_reviews: number;
+  offered_terms: string[];
+};
 
 function App() {
   const [openDropdown, setOpenDropdown] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [isHeaderClicked, setIsHeaderClicked] = useState(false);
   const [isSearchClicked, setIsSearchClicked] = useState(false);
+  const [searchedCourses, setSearchedCourses] = useState<Course[]>(courses);
 
-  const dropdownOptions = ['Skull emoji', 'Skull', 'Bruh'];
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const input = e.target.value.toLowerCase();
+    setInputValue(input);
 
-  const courses = [
-    {
-      course_prefix: 'COMP',
-      course_code: 1511,
-      course_title: 'Programming Fundamentals',
-      average_stars: 4.8,
-      total_reviews: 68,
-      offered_terms: ['Term 1', 'Term 2', 'Term 3'],
-    },
-    {
-      course_prefix: 'COMP',
-      course_code: 1531,
-      course_title: 'Software Engineering Fundamentals',
-      average_stars: 3.9,
-      total_reviews: 47,
-      offered_terms: ['Term 1', 'Term 2', 'Term 3'],
-    },
-    {
-      course_prefix: 'COMP',
-      course_code: 1521,
-      course_title: 'Computer Systems Fundamentals',
-      average_stars: 4,
-      total_reviews: 40,
-      offered_terms: ['Term 1', 'Term 2', 'Term 3'],
-    },
-    {
-      course_prefix: 'COMP',
-      course_code: 2521,
-      course_title: 'Data Structures and Algorithms',
-      average_stars: 4,
-      total_reviews: 36,
-      offered_terms: ['Summer', 'Term 1', 'Term 2', 'Term 3'],
-    },
-    {
-      course_prefix: 'COMP',
-      course_code: 2511,
-      course_title: 'Object-Oriented Design & Programming',
-      average_stars: 3,
-      total_reviews: 33,
-      offered_terms: ['Term 1', 'Term 2', 'Term 3'],
-    },
-    {
-      course_prefix: 'COMP',
-      course_code: 3311,
-      course_title: 'Database Systems',
-      average_stars: 4,
-      total_reviews: 33,
-      offered_terms: ['Term 1', 'Term 3'],
-    },
-  ];
+    setSearchedCourses(
+      courses.filter((course) =>
+        `${course.course_prefix}${course.course_code}.` // Combines course prefix and code into a string
+          .toLowerCase()
+          .includes(input)
+      )
+    );
+  };
 
   return (
     <div className="flex gap-40 h-screen">
@@ -78,7 +49,7 @@ function App() {
         <div className="mt-8 flex flex-col gap-3">
           <SearchBar
             inputValue={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
+            onChange={handleSearch}
             onClick={() => setIsSearchClicked(true)}
           />
           <Dropdown
@@ -88,7 +59,7 @@ function App() {
           />
         </div>
         <div className="grid grid-cols-3 gap-10 mt-8">
-          {courses.map((course, idx) => (
+          {searchedCourses.map((course, idx) => (
             <Card
               key={idx}
               coursePrefix={course.course_prefix}
